@@ -39,6 +39,17 @@ describe("react", () => {
       foo: "",
       strings: ["foo", "bar", "spam", "!!"],
     });
+
+    store.fields.strings.push();
+    expect(store.value).toEqual({
+      bar: false,
+      foo: "",
+      strings: ["foo", "bar", "spam", "!!", ""],
+    });
+    expect(form.find(".string")).toHaveLength(5);
+
+    store.fields.strings.remove(1);
+    expect(form.find(".string")).toHaveLength(4);
   });
 
 });

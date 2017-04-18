@@ -7,11 +7,7 @@ export class ArrayForm extends ObjectField<IArrayFormData> {
 
   public fields = {
     eggs: new Field(""),
-    plains: new ArrayField((val: IPlainFormData) => {
-      const form = new PlainForm();
-      form.value = val;
-      return form;
-    }),
+    plains: new ArrayField<IPlainFormData, PlainForm>(() => new PlainForm()),
   };
 
 }
