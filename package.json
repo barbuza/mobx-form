@@ -4,9 +4,10 @@
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "tslint src/**/*.ts src/**/*.tsx",
-    "start": "jest --watch"
+    "start": "jest --watch",
+    "build": "rimraf lib && tsc && rimraf lib/__tests__"
   },
   "dependencies": {
     "@types/react": "^15.0.0",
@@ -17,11 +18,13 @@
   "devDependencies": {
     "@types/enzyme": "^2.7.9",
     "@types/jest": "^19.2.2",
+    "coveralls": "^2.13.0",
     "enzyme": "^2.8.2",
     "jest": "^19.0.2",
     "jest-enzyme": "^3.0.1",
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
+    "rimraf": "^2.6.1",
     "ts-jest": "^19.0.10",
     "tslint": "^5.1.0",
     "typescript": "^2.2.2"
@@ -37,6 +40,12 @@
       "js",
       "tsx"
     ],
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "!src/__tests__/**/*.ts",
+      "!src/__tests__/**/*.tsx"
+    ]
   }
 }
