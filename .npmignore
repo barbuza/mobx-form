@@ -1,0 +1,9 @@
+src/
+coverage/
+.travis.yml
+tsconfig.json
+tslint.json
+yarn.lock
+npm-debug.log
+.gitignore
+.editorconfig
