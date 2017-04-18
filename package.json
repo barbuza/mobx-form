@@ -1,0 +1,42 @@
+{
+  "name": "mobx-form",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "lint": "tslint src/**/*.ts src/**/*.tsx",
+    "start": "jest --watch"
+  },
+  "dependencies": {
+    "@types/react": "^15.0.0",
+    "mobx": "^3.0.0",
+    "mobx-react": "^4.0.0",
+    "react": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^2.7.9",
+    "@types/jest": "^19.2.2",
+    "enzyme": "^2.8.2",
+    "jest": "^19.0.2",
+    "jest-enzyme": "^3.0.1",
+    "react-addons-test-utils": "^15.5.1",
+    "react-dom": "^15.5.4",
+    "ts-jest": "^19.0.10",
+    "tslint": "^5.1.0",
+    "typescript": "^2.2.2"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "testRegex": "/__tests__/[^/]+-test\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "tsx"
+    ],
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
+  }
+}
