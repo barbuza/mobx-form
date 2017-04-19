@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import * as React from "react";
 import { Checkbox, FieldError, Input } from "../index";
-import { ReactFormStore } from "./ReactFormStore";
+import { ReactFormStore } from "./forms";
 
 @observer
 export class ReactForm extends React.Component<{ store: ReactFormStore }, never> {

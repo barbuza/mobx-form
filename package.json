@@ -1,11 +1,11 @@
 {
   "name": "@barbuza/mobx-form",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
-    "lint": "tslint src/**/*.ts src/**/*.tsx",
+    "lint": "tslint -p tsconfig.json",
     "start": "jest --watch",
     "build": "rimraf lib && tsc && rimraf lib/__tests__"
   },

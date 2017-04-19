@@ -3,6 +3,10 @@ import { IField } from "./IField";
 
 export class ArrayField<T, F extends IField<T>> implements IField<T[]> {
 
+  public static canBeNamed() {
+    // pass
+  }
+
   @observable
   public fields: F[];
 
@@ -17,6 +21,10 @@ export class ArrayField<T, F extends IField<T>> implements IField<T[]> {
       return field;
     };
     this.fields = [];
+  }
+
+  public asArray(): ArrayField<T[], this> {
+    return new ArrayField<T[], this>(() => this.clone());
   }
 
   @action
@@ -60,6 +68,10 @@ export class ArrayField<T, F extends IField<T>> implements IField<T[]> {
   @action
   protected valueSetter(val: T[]) {
     this.fields = val.map(this.makeField);
+  }
+
+  protected clone() {
+    return new (this.constructor as typeof ArrayField)(this.fieldFactory) as this;
   }
 
 }

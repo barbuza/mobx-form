@@ -1,4 +1,5 @@
 import { action, computed, observable } from "mobx";
+import { ArrayField } from "./ArrayField";
 import { IField } from "./IField";
 
 export abstract class ObjectField<T> implements IField<T> {
@@ -12,6 +13,10 @@ export abstract class ObjectField<T> implements IField<T> {
 
   public set value(val: T) {
     this.valueSetter(val);
+  }
+
+  public asArray(): ArrayField<T, this> {
+    return new ArrayField<T, this>(() => this.clone());
   }
 
   @computed
@@ -48,6 +53,10 @@ export abstract class ObjectField<T> implements IField<T> {
     for (const key of Object.keys(val)) {
       this.fields[key].value = val[key];
     }
+  }
+
+  protected clone() {
+    return new (this.constructor as any)() as this;
   }
 
 }

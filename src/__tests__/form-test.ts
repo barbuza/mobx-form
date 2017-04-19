@@ -1,6 +1,4 @@
-import { ArrayForm } from "./ArrayForm";
-import { NestedForm } from "./NestedForm";
-import { PlainForm } from "./PlainForm";
+import { ArrayForm, NestedForm, PlainForm } from "./forms";
 
 describe("form", () => {
 
@@ -96,6 +94,30 @@ describe("form", () => {
         bar: 10,
         foo: "eggs",
         spam: true,
+      }],
+    });
+
+    form.fields.plains.push();
+    expect(form.value).toEqual({
+      eggs: "test",
+      plains: [{
+        bar: 10,
+        foo: "eggs",
+        spam: true,
+      }, {
+        bar: 0,
+        foo: "",
+        spam: false,
+      }],
+    });
+
+    form.fields.plains.remove(0);
+    expect(form.value).toEqual({
+      eggs: "test",
+      plains: [{
+        bar: 0,
+        foo: "",
+        spam: false,
       }],
     });
   });

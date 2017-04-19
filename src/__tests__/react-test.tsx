@@ -1,8 +1,8 @@
 import { mount } from "enzyme";
 import { runInAction } from "mobx";
 import * as React from "react";
+import { ReactFormStore } from "./forms";
 import { ReactForm } from "./ReactForm";
-import { ReactFormStore } from "./ReactFormStore";
 
 describe("react", () => {
 
