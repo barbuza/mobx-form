@@ -5,7 +5,7 @@ import { IValidator } from "./validators";
 
 export class Field<T> implements IField<T> {
 
-  @observable
+  @observable.ref
   public value: T;
 
   protected readonly defaultValue: T;

@@ -1,9 +1,10 @@
 {
   "name": "@barbuza/mobx-form",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
+    "prepublish": "in-publish && npm-run-all lint test build || not-in-publish",
     "test": "jest --coverage",
     "lint": "tslint -p tsconfig.json",
     "start": "jest --watch",
@@ -20,8 +21,10 @@
     "@types/jest": "^19.2.2",
     "coveralls": "^2.13.0",
     "enzyme": "^2.8.2",
+    "in-publish": "^2.0.0",
     "jest": "^19.0.2",
     "jest-enzyme": "^3.0.1",
+    "npm-run-all": "^4.0.2",
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "rimraf": "^2.6.1",

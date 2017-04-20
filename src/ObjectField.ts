@@ -4,7 +4,7 @@ import { IField } from "./IField";
 
 export abstract class ObjectField<T> implements IField<T> {
 
-  @observable
+  @observable.shallow
   public abstract fields: {[P in keyof T]: IField<T[P]>};
 
   public get value(): T {

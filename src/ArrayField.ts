@@ -7,7 +7,7 @@ export class ArrayField<T, F extends IField<T>> implements IField<T[]> {
     // pass
   }
 
-  @observable
+  @observable.shallow
   public fields: F[];
 
   protected readonly makeField: (value: T) => F;
