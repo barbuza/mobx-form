@@ -1,4 +1,4 @@
-import { ArrayForm, NestedForm, PlainForm } from "./forms";
+import { ArrayForm, CustomValidation, NestedForm, PlainForm } from "./forms";
 
 describe("form", () => {
 
@@ -120,6 +120,16 @@ describe("form", () => {
         spam: false,
       }],
     });
+  });
+
+  it("custom validation", () => {
+    const form = new CustomValidation();
+    expect(form.isValid).toBe(false);
+    form.value = {
+      bar: "123",
+      foo: "",
+    };
+    expect(form.isValid).toBe(true);
   });
 
 });

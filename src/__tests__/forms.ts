@@ -62,3 +62,21 @@ export class ReactFormStore extends ObjectField<IReactFormStoreData> {
   };
 
 }
+
+export interface ICustomValidationData {
+  foo: string;
+  bar: string;
+}
+
+export class CustomValidation extends ObjectField<ICustomValidationData> {
+
+  public fields = {
+    bar: new Field(""),
+    foo: new Field(""),
+  };
+
+  protected validate() {
+    return super.validate() && this.fields.bar.value.length >= 3;
+  }
+
+}

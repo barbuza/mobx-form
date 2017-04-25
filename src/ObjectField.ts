@@ -21,13 +21,7 @@ export abstract class ObjectField<T> implements IField<T> {
 
   @computed
   public get isValid(): boolean {
-    for (const key of Object.keys(this.fields)) {
-      const field = this.fields[key];
-      if (!field.isValid) {
-        return false;
-      }
-    }
-    return true;
+    return this.validate();
   }
 
   @action
@@ -57,6 +51,16 @@ export abstract class ObjectField<T> implements IField<T> {
 
   protected clone() {
     return new (this.constructor as any)() as this;
+  }
+
+  protected validate(): boolean {
+    for (const key of Object.keys(this.fields)) {
+      const field = this.fields[key];
+      if (!field.isValid) {
+        return false;
+      }
+    }
+    return true;
   }
 
 }
