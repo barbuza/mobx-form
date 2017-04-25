@@ -15,7 +15,7 @@ export class ReactForm extends React.Component<{ store: ReactFormStore }, never>
           <FieldError className="error" field={store.fields.bar} />
         </div>
         <div>
-          <Input className="foo" field={store.fields.foo} />
+          <Input type="password" className="foo" field={store.fields.foo} />
           <FieldError className="error" field={store.fields.foo} />
         </div>
         <div>

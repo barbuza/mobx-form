@@ -6,11 +6,11 @@ import { IField } from "./IField";
 export class Input extends React.Component<React.HTMLProps<HTMLInputElement> & { field: IField<string> }, never> {
 
   public render() {
-    const { field, ...props } = this.props;
+    const { field, type = "text", ...props } = this.props;
     return (
       <input
         {...props}
-        type="text"
+        type={type}
         value={field.value}
         onChange={this.onChange} />
     );

@@ -6,6 +6,12 @@ import { ReactForm } from "./ReactForm";
 
 describe("react", () => {
 
+  it("input types", () => {
+    const store = new ReactFormStore();
+    const form = mount(<ReactForm store={store}/>);
+    expect(form.find('[type="password"]')).toHaveLength(1);
+  });
+
   it("render", () => {
     const store = new ReactFormStore();
     const form = mount(<ReactForm store={store} />);
