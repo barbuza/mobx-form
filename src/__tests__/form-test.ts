@@ -1,5 +1,5 @@
-import { ArrayForm, CustomValidation, NestedForm, PlainForm } from "./forms";
 import { Field } from "../index";
+import { ArrayForm, CustomValidation, NestedForm, PlainForm } from "./forms";
 
 describe("form", () => {
 
