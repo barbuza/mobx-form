@@ -1,6 +1,6 @@
 {
   "name": "@barbuza/mobx-form",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
@@ -28,7 +28,7 @@
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "rimraf": "^2.6.1",
-    "ts-jest": "^19.0.10",
+    "ts-jest": "^19.0.13",
     "tslint": "^5.1.0",
     "typescript": "^2.2.2"
   },

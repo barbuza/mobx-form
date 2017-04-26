@@ -1,4 +1,5 @@
 import { ArrayForm, CustomValidation, NestedForm, PlainForm } from "./forms";
+import { Field } from "../index";
 
 describe("form", () => {
 
@@ -130,6 +131,20 @@ describe("form", () => {
       foo: "",
     };
     expect(form.isValid).toBe(true);
+  });
+
+  it("transform", () => {
+    const transformField = new Field("", [], [(val) => val.toUpperCase(), (val) => `foo${val}`]);
+    transformField.value = "foo";
+    expect(transformField.value).toBe("fooFOO");
+
+    Field.useStaticRendering(true);
+
+    const transformFieldServer = new Field("", [], [(val) => val.toUpperCase(), (val) => `foo${val}`]);
+    transformFieldServer.value = "foo";
+    expect(transformFieldServer.value).toBe("foo");
+
+    Field.useStaticRendering(false);
   });
 
 });
