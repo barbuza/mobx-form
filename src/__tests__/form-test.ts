@@ -147,4 +147,123 @@ describe("form", () => {
     Field.useStaticRendering(false);
   });
 
+  it("version", () => {
+    const field = new Field("");
+    expect(field.version).toBe(0);
+    field.value = "test";
+    expect(field.version).toBe(1);
+    field.value = "";
+    expect(field.version).toBe(2);
+    field.value = "";
+    expect(field.version).toBe(2);
+  });
+
+  it("object version", () => {
+    const obj = new PlainForm();
+    expect(obj.version).toBe(0);
+    obj.fields.bar.value = 1;
+    expect(obj.version).toBe(1);
+    obj.fields.bar.value = 1;
+    expect(obj.version).toBe(1);
+    obj.fields.foo.value = "";
+    expect(obj.version).toBe(1);
+    obj.fields.foo.value = "foo";
+    expect(obj.version).toBe(2);
+    obj.fields.bar.value = 2;
+    expect(obj.version).toBe(3);
+
+    obj.value = {
+      bar: 3,
+      foo: "bar",
+      spam: true,
+    };
+    expect(obj.version).toBe(4);
+
+    obj.value = {
+      bar: 3,
+      foo: "bar",
+      spam: true,
+    };
+    expect(obj.version).toBe(4);
+
+    obj.value = {
+      bar: 4,
+      foo: "bar",
+      spam: true,
+    };
+    expect(obj.version).toBe(5);
+
+    obj.value = {
+      bar: 4,
+      foo: "spam",
+      spam: false,
+    };
+    expect(obj.version).toBe(6);
+
+    obj.value = {
+      bar: 5,
+      foo: "eggs",
+      spam: true,
+    };
+    expect(obj.version).toBe(7);
+  });
+
+  it("array version", () => {
+    const ary = new ArrayForm().fields.plains;
+    expect(ary.version).toBe(0);
+    ary.push();
+    expect(ary.version).toBe(1);
+    ary.push();
+    expect(ary.version).toBe(2);
+    ary.remove(0);
+    expect(ary.version).toBe(3);
+
+    ary.fields[0].fields.bar.value = 1;
+    expect(ary.version).toBe(4);
+
+    ary.fields[0].fields.bar.value = 1;
+    expect(ary.version).toBe(4);
+
+    ary.remove(0);
+    expect(ary.version).toBe(5);
+
+    ary.push();
+    expect(ary.version).toBe(6);
+
+    ary.fields[0].fields.bar.value = 1;
+    expect(ary.version).toBe(7);
+
+    ary.value = [
+      { bar: 1, foo: "123123", spam: true },
+      { bar: 2, foo: "", spam: false },
+    ];
+    expect(ary.version).toBe(8);
+
+    ary.value = [
+      { bar: 1, foo: "123123", spam: true },
+      { bar: 2, foo: "", spam: false },
+    ];
+    expect(ary.version).toBe(8);
+
+    ary.value = [
+      { bar: 1, foo: "123123", spam: true },
+      { bar: 3, foo: "sdfsdfsdf", spam: false },
+    ];
+    expect(ary.version).toBe(9);
+
+    ary.value = [
+      { bar: 25, foo: "123123", spam: true },
+    ];
+    expect(ary.version).toBe(10);
+
+    ary.value = [];
+    expect(ary.version).toBe(11);
+
+    ary.push();
+    ary.push();
+    expect(ary.version).toBe(13);
+
+    ary.value = [];
+    expect(ary.version).toBe(14);
+  });
 });

@@ -7,6 +7,14 @@ export abstract class ObjectField<T> implements IField<T> {
   @observable.shallow
   public abstract fields: {[P in keyof T]: IField<T[P]>};
 
+  @observable
+  protected internalVersion = 0;
+
+  @computed
+  public get version() {
+    return this.internalVersion + Object.keys(this.fields).reduce((sum, key) => sum + this.fields[key].version, 0);
+  }
+
   public get value(): T {
     return this.valueGetter;
   }
@@ -44,8 +52,13 @@ export abstract class ObjectField<T> implements IField<T> {
 
   @action
   protected valueSetter(val: T) {
+    const prevVersion = Object.keys(this.fields).reduce((sum, key) => sum + this.fields[key].version, 0);
     for (const key of Object.keys(val)) {
       this.fields[key].value = val[key];
+    }
+    const newVersion = Object.keys(this.fields).reduce((sum, key) => sum + this.fields[key].version, 0);
+    if (newVersion !== prevVersion) {
+      this.internalVersion -= newVersion - prevVersion - 1;
     }
   }
 

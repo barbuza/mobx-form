@@ -1,4 +1,4 @@
-import { action, computed, intercept, IValueWillChange, observable } from "mobx";
+import { action, computed, intercept, IValueWillChange, observable, runInAction } from "mobx";
 import { ArrayField } from "./ArrayField";
 import { IField } from "./IField";
 import { IValidator } from "./validators";
@@ -11,18 +11,38 @@ export class Field<T> implements IField<T> {
 
   protected static staticRendering = false;
 
+  public set value(val: T) {
+    if (this.internalValue !== val) {
+      runInAction(() => {
+        this.internalValue = val;
+        this.internalVersion++;
+      });
+    }
+  }
+
+  public get value() {
+    return this.internalValue;
+  }
+
   @observable.ref
-  public value: T;
+  protected internalValue: T;
+
+  public get version() {
+    return this.internalVersion;
+  }
+
+  @observable
+  protected internalVersion = 0;
 
   protected readonly defaultValue: T;
   protected readonly validators: Array<IValidator<T>>;
 
   constructor(value: T, validators: Array<IValidator<T>> = [], transforms: Array<(value: T) => T> = []) {
     this.defaultValue = value;
-    this.value = value;
+    this.internalValue = value;
     this.validators = validators;
     if (!Field.staticRendering && transforms.length) {
-      intercept(this, "value", (change: IValueWillChange<T>) => {
+      intercept(this, "internalValue", (change: IValueWillChange<T>) => {
         for (const t of transforms) {
           change.newValue = t(change.newValue);
         }

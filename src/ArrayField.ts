@@ -7,8 +7,19 @@ export class ArrayField<T, F extends IField<T>> implements IField<T[]> {
     // pass
   }
 
+  @computed
+  public get version() {
+    return this.internalVersion + this.removedVersion + this.fields.reduce((sum, f) => sum + f.version, 0);
+  }
+
   @observable.shallow
   public fields: F[];
+
+  @observable
+  protected internalVersion = 0;
+
+  @observable
+  protected removedVersion = 0;
 
   protected readonly makeField: (value: T) => F;
   protected readonly fieldFactory: () => F;
@@ -29,12 +40,16 @@ export class ArrayField<T, F extends IField<T>> implements IField<T[]> {
 
   @action
   public push() {
+    this.internalVersion++;
     this.fields.push(this.fieldFactory());
   }
 
   @action
   public remove(index: number) {
-    this.fields.splice(index, 1);
+    this.internalVersion++;
+    for (const field of this.fields.splice(index, 1)) {
+      this.removedVersion += field.version;
+    }
   }
 
   @action
@@ -67,7 +82,16 @@ export class ArrayField<T, F extends IField<T>> implements IField<T[]> {
 
   @action
   protected valueSetter(val: T[]) {
-    this.fields = val.map(this.makeField);
+    if (this.fields.length === val.length) {
+      val.forEach((item, index) => {
+        this.fields[index].value = item;
+      });
+    } else {
+      this.internalVersion++;
+      this.removedVersion += this.fields.reduce((sum, f) => sum + f.version, 0);
+      this.fields = val.map(this.makeField);
+      this.removedVersion -= this.fields.reduce((sum, f) => sum + f.version, 0);
+    }
   }
 
   protected clone() {
