@@ -6,7 +6,7 @@ node_js:
 
 install:
   - yarn
-  - npm install react@16.1.1 @types/react@16.0.25
+  - npm install --no-save react@^15.0.0
 
 script:
   - npm run lint
