@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/enzyme": "^2.7.9",
     "@types/jest": "^19.2.2",
-    "@types/react": "*",
+    "@types/react": "15.0.22",
     "coveralls": "^2.13.0",
     "enzyme": "^2.8.2",
     "in-publish": "^2.0.0",
