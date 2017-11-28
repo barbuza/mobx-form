@@ -6,7 +6,7 @@ node_js:
 
 install:
   - yarn
-  - npm install --no-save react@^15.0.0
+  - npm install --no-save react@^15.0.0 mobx@^3.0.0 mobx-react@^4.0.0
 
 script:
   - npm run lint
