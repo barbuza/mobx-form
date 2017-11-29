@@ -10,15 +10,10 @@
     "start": "jest --watch",
     "build": "rimraf lib && tsc && rimraf lib/__tests__"
   },
-  "dependencies": {
-    "@types/react": "^15.0.0",
-    "mobx": "^3.0.0",
-    "mobx-react": "^4.0.0",
-    "react": "^15.0.0"
-  },
   "devDependencies": {
-    "@types/enzyme": "^2.7.9",
+    "@types/enzyme": "2.7.9",
     "@types/jest": "^19.2.2",
+    "@types/react": "15.0.22",
     "coveralls": "^2.13.0",
     "enzyme": "^2.8.2",
     "in-publish": "^2.0.0",
@@ -29,8 +24,13 @@
     "react-dom": "^15.5.4",
     "rimraf": "^2.6.1",
     "ts-jest": "^19.0.13",
-    "tslint": "^5.1.0",
-    "typescript": "^2.2.2"
+    "tslint": "5.1.0",
+    "typescript": "2.3.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "mobx": "*",
+    "mobx-react": "*"
   },
   "jest": {
     "transform": {
