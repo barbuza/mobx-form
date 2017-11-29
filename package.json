@@ -11,7 +11,7 @@
     "build": "rimraf lib && tsc && rimraf lib/__tests__"
   },
   "devDependencies": {
-    "@types/enzyme": "^2.7.9",
+    "@types/enzyme": "2.7.9",
     "@types/jest": "^19.2.2",
     "@types/react": "15.0.22",
     "coveralls": "^2.13.0",
@@ -25,7 +25,7 @@
     "rimraf": "^2.6.1",
     "ts-jest": "^19.0.13",
     "tslint": "^5.1.0",
-    "typescript": "^2.2.2"
+    "typescript": "2.3.0"
   },
   "peerDependencies": {
     "react": "*",
